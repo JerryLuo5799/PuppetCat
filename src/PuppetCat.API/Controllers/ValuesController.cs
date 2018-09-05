@@ -14,6 +14,7 @@ namespace PuppetCat.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
+            string str = string.Empty;
             return new string[] { "value1", "value2" };
         }
 
