@@ -101,7 +101,8 @@ namespace PuppetCat.AspNetCore.Mvc.Middleware
                             RouteData r = new RouteData();
                             context.RouteData.Values["controller"] = arrRoute[arrRoute.Length - 2];
                             context.RouteData.Values["action"] = arrRoute[arrRoute.Length - 1];
-                            context.RouteData.Values["distributeUrl"] = requestedUrl;
+                            context.RouteData.Values["distributeUrl"] = requestedUrl ;
+
                             await _mvcRoute.RouteAsync(context);
                         }
                         else
@@ -121,13 +122,8 @@ namespace PuppetCat.AspNetCore.Mvc.Middleware
             }
             else if (context.HttpContext.Request.Method.ToLower() == "post")
             {
-                string[] arrRoute = requestedUrl.TrimStart('/').Split('/');
-                context.RouteData.Values["controller"] = arrRoute[arrRoute.Length - 2];
-                context.RouteData.Values["action"] = arrRoute[arrRoute.Length - 1];
-                context.RouteData.Values["distributeUrl"] = requestedUrl;
-                await _mvcRoute.RouteAsync(context);
+                throw new BadRequestException("Bad Post request");
             }
-
 
         }
 

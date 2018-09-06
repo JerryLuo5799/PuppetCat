@@ -22,25 +22,11 @@ namespace PuppetCat.AspNetCore.Mvc
         [Required]
         public string lang { get; set; }
 
-        /// <summary>
-        /// version
-        /// </summary>
-        [Required]
-        public string version { get; set; }
 
         /// <summary>
         /// token, Required if is admin
         /// </summary>
         public string token { get; set; }
 
-        /// <summary>
-        /// pageIndex, be used when paging search
-        /// </summary>
-        public int pageIndex { get; set; }
-
-        /// <summary>
-        /// pageSize, be used when paging search
-        /// </summary>
-        public int pageSize { get; set; }
     }
 }

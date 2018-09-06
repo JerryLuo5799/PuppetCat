@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -10,9 +11,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.PlatformAbstractions;
 using PuppetCat.AspNetCore.Mvc.Middleware;
 using PuppetCat.Sample.Core;
 using PuppetCat.Sample.Data;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace PuppetCat.Sample.API
 {
@@ -38,6 +41,22 @@ namespace PuppetCat.Sample.API
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(options => options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver());
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "PuppetCat.Sample.API"
+                });
+
+                //Determine base path for the application.  
+                //var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                //Set the comments path for the swagger json and ui.  
+                //var xmlPath = Path.Combine(basePath, "PuppetCat.Sample.API.xml");
+                //options.IncludeXmlComments(xmlPath);
+            });
+
 
             //context connection
             SampleDbContext.ConStr = Configuration.GetConnectionString("SampleConnection");
@@ -67,14 +86,22 @@ namespace PuppetCat.Sample.API
             app.UseHttpsRedirection();
 
 
-            //use ErrorHandlingMiddleware in SSW.ChinaWebstie.Common
+            //use ErrorHandlingMiddleware
             app.UseErrorHandling();
             app.UseMvc(routes =>
             {
                 //use my Route rules to distribute request
-               routes.Routes.Add(new DistributeRoute(app.ApplicationServices));
+                routes.Routes.Add(new DistributeRoute(app.ApplicationServices));
             });
-            app.UseMvcWithDefaultRoute();
+           
+            //app.UseMvcWithDefaultRoute();
+
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", $"PuppetCat.Sample.API - {DateTime.Now.ToString("yyMMddHHmmss")}");
+            });
         }
     }
 }
