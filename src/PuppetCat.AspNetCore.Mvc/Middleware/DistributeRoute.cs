@@ -97,7 +97,7 @@ namespace PuppetCat.AspNetCore.Mvc.Middleware
                             {
                                 uri = uri.Replace(".", "/");
                             }
-                            string[] arrRoute = request.uri.TrimStart('/').Split('/');
+                            string[] arrRoute = uri.TrimStart('/').Split('/');
                             RouteData r = new RouteData();
                             context.RouteData.Values["controller"] = arrRoute[arrRoute.Length - 2];
                             context.RouteData.Values["action"] = arrRoute[arrRoute.Length - 1];

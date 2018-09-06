@@ -72,7 +72,7 @@ namespace PuppetCat.Sample.API
             app.UseMvc(routes =>
             {
                 //use my Route rules to distribute request
-               // routes.Routes.Add(new DistributeRoute(app.ApplicationServices));
+               routes.Routes.Add(new DistributeRoute(app.ApplicationServices));
             });
             app.UseMvcWithDefaultRoute();
         }
