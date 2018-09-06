@@ -4,8 +4,8 @@
     "windowsAuthentication": false, 
     "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:9546",
-      "sslPort": 44365
+      "applicationUrl": "http://localhost:11005",
+      "sslPort": 44376
     }
   },
   "profiles": {
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "PuppetCat.API": {
+    "PuppetCat.Sample.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/values",

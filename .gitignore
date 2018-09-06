@@ -4,3 +4,17 @@
 
 /src/PuppetCat.API/bin/Debug/netcoreapp2.1
 /src/PuppetCat.API/obj
+/src/PuppetCat.AspNetCore.Core/bin/Debug/netcoreapp2.1
+/src/PuppetCat.AspNetCore.Core/obj
+/src/PuppetCat.AspNetCore.Mvc/bin/Debug/netcoreapp2.1
+/src/PuppetCat.AspNetCore.Mvc/obj
+/src/PuppetCat.Sample.API/bin/Debug/netcoreapp2.1
+/src/PuppetCat.Sample.API/obj
+/src/PuppetCat.Sample.Core/bin/Debug/netcoreapp2.1
+/src/PuppetCat.Sample.Core/obj
+/src/PuppetCat.Sample.Data/bin/Debug
+/src/PuppetCat.Sample.Data/obj
+/src/PuppetCat.Sample.Repository/bin/Debug/netcoreapp2.1
+/src/PuppetCat.Sample.Repository/obj
+/src/PuppetCat.Sample.WebLogic/bin/Debug/netcoreapp2.1
+/src/PuppetCat.Sample.WebLogic/obj
