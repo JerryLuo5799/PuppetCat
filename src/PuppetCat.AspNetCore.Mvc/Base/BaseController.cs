@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PuppetCat.AspNetCore.Mvc.Log;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,6 +8,22 @@ namespace PuppetCat.AspNetCore.Mvc
 {
     public class BaseController : Controller
     {
+        /// <summary>
+        /// 日志对象
+        /// </summary>
+        protected Dictionary<string,string> _requestLog
+        {
+            get
+            {
+                RequestLogEntity log = HttpContext.Items["RequestLogEntity"] as RequestLogEntity;
+
+                return (log ?? new RequestLogEntity()).ApiTrace;
+
+
+           }
+        }
+
+
         /// <summary>
         /// Create return json
         /// </summary>

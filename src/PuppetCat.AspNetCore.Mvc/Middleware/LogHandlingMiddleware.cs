@@ -48,6 +48,9 @@ namespace PuppetCat.AspNetCore.Mvc.Middleware
 
             RequestLogEntity requestLog = new RequestLogEntity();
 
+            context.Items["RequestLogEntity"] = requestLog;
+
+
             await FormatRequest(context.Request, requestLog);
 
             var originalBodyStream = context.Response.Body;
@@ -88,8 +91,9 @@ namespace PuppetCat.AspNetCore.Mvc.Middleware
                 //We convert the byte[] into a string using UTF8 encoding...
                 bodyAsText = Encoding.UTF8.GetString(buffer);
 
+
                 //..and finally, assign the read body back to the request body, which is allowed because of EnableRewind()
-                context.Body = body;
+                context.Body = new MemoryStream(Encoding.UTF8.GetBytes(bodyAsText));
 
                 BaseRequest request = JsonConvert.DeserializeObject<BaseRequest>(bodyAsText);
                 requestLog.RequestId = request.requestId;
