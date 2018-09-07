@@ -36,7 +36,12 @@ namespace PuppetCat.Sample.API
                 });
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(options => options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver());
+            services.AddMvc(
+                options =>
+                {
+                    options.Filters.Add<ModelValidationActionFilter>();
+                }
+               ).SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(options => options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver());
 
             services.AddSwaggerGen(options =>
             {

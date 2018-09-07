@@ -8,7 +8,6 @@ namespace PuppetCat.Sample.WebLogic
 {
     #region GetAll
 
-
     public class ApiUserGetAllResponse
     {
         /// <summary>
@@ -41,12 +40,6 @@ namespace PuppetCat.Sample.WebLogic
 
     public class ApiUserAddRequest
     {
-        /// <summary>
-        /// 用户Id
-        /// </summary>
-        [Required]
-        [Description("用户Id")]
-        public uint Id { get; set; }
         /// <summary>
         /// 用户姓名
         /// </summary>
