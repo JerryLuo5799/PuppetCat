@@ -27,7 +27,7 @@ namespace PuppetCat.Sample.API.Controllers
         [HttpPost]
         [Route("GetAll")]
         [ProducesResponseType(typeof(ResponseDefault<List<ApiUserGetAllResponse>>), 200)]
-        public JsonResult GetAll([FromBody] RequestNoData request)
+        public JsonResult GetAll([FromBody]RequestNoData request)
         {
             List<User> list = UserRepository.Intance.LoadListAll();
 
@@ -41,21 +41,21 @@ namespace PuppetCat.Sample.API.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost]
-        [Route("Add")]
-        [ProducesResponseType(typeof(ResponseNoData), 200)]
-        public JsonResult Add([FromBody] ResponseDefault<ApiUserAddRequest> request)
-        {
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            User user = new User();
-            user = EntityUtils.CopyToModel<ApiUserAddRequest, User>(request.data);
-            UserRepository.Intance.Save(user);
+        //[HttpPost]
+        //[Route("Add")]
+        //[ProducesResponseType(typeof(ResponseNoData), 200)]
+        //public JsonResult Add([FromBody] ResponseDefault<ApiUserAddRequest> request)
+        //{
+        //    //Stopwatch sw = new Stopwatch();
+        //    //sw.Start();
+        //    User user = new User();
+        //    user = EntityUtils.CopyToModel<ApiUserAddRequest, User>(request.data);
+        //    UserRepository.Intance.Save(user);
 
-            sw.Stop();
-            _requestLog.Add("APIExcuseTime", sw.ElapsedMilliseconds.ToString());
+        //    //sw.Stop();
+        //    //_requestLog.Add("APIExcuseTime", sw.ElapsedMilliseconds.ToString());
 
-            return CreateResult<ResponseNoData>(ResponseStatusCode.OK);
-        }
+        //    return CreateResult<ResponseNoData>(ResponseStatusCode.OK);
+        //}
     }
 }
