@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.PlatformAbstractions;
+using NLog;
+using NLog.Extensions.Logging;
+using NLog.Web;
 using PuppetCat.AspNetCore.Mvc.Middleware;
 using PuppetCat.Sample.Core;
 using PuppetCat.Sample.Data;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
 
 namespace PuppetCat.Sample.API
 {
@@ -70,7 +66,7 @@ namespace PuppetCat.Sample.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseCors("AllowAllOrigin");
 
@@ -85,9 +81,14 @@ namespace PuppetCat.Sample.API
 
             app.UseHttpsRedirection();
 
+            loggerFactory.AddNLog();//添加NLog
+            //LogManager.LoadConfiguration("nlog.config");
+            loggerFactory.ConfigureNLog("nlog.config");
 
-            //use ErrorHandlingMiddleware
+            //use Middleware
+            app.UseLogHandling();
             app.UseErrorHandling();
+
             app.UseMvc(routes =>
             {
                 //use my Route rules to distribute request

@@ -105,11 +105,4 @@ namespace PuppetCat.AspNetCore.Mvc.Middleware
         }
     }
 
-    public static class ErrorHandlingExtensions
-    {
-        public static IApplicationBuilder UseErrorHandling(this IApplicationBuilder builder)
-        {
-            return builder.UseMiddleware<ErrorHandlingMiddleware>();
-        }
-    }
 }

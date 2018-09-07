@@ -9,7 +9,6 @@ using PuppetCat.Sample.Data;
 using PuppetCat.Sample.Repository;
 using PuppetCat.Sample.WebLogic;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace PuppetCat.Sample.API.Controllers
 {

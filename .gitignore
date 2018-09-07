@@ -18,3 +18,4 @@
 /src/PuppetCat.Sample.Repository/obj
 /src/PuppetCat.Sample.WebLogic/bin/Debug/netcoreapp2.1
 /src/PuppetCat.Sample.WebLogic/obj
+/src/PuppetCat.Sample.API/internal-nlog.txt

@@ -14,13 +14,14 @@ namespace PuppetCat.AspNetCore.Mvc
         /// uri
         /// </summary>
         [Required]
-        public string uri { get; set; }
+        public string requestId { get; set; } = Guid.NewGuid().ToString();
+
 
         /// <summary>
-        /// languages,cn=Chinese, en=English
+        /// uri
         /// </summary>
         [Required]
-        public string lang { get; set; }
+        public string uri { get; set; }
 
 
         /// <summary>
