@@ -41,7 +41,10 @@ namespace PuppetCat.Sample.API
                 {
                     options.Filters.Add<ModelValidationActionFilter>();
                 }
-               ).SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(options => options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver());
+               ).AddJsonOptions(opt =>
+               {
+                   opt.JsonSerializerOptions.PropertyNamingPolicy = null;
+               });
 
             services.AddSwaggerGen(options =>
             {
@@ -99,7 +102,7 @@ namespace PuppetCat.Sample.API
                 //use my Route rules to distribute request
                 routes.Routes.Add(new DistributeRoute(app.ApplicationServices));
             });
-           
+
             //app.UseMvcWithDefaultRoute();
 
 
