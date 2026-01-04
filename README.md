@@ -79,7 +79,7 @@ PuppetCat/
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/JerryLuo5799/PuppetCat.git
+git clone <repository-url>
 cd PuppetCat
 ```
 
@@ -90,7 +90,7 @@ Edit `src/PuppetCat.Sample.API/appsettings.json`:
 ```json
 {
   "ConnectionStrings": {
-    "SampleConnection": "Server=127.0.0.1;database=puppetcat_sample;uid=root;password=YOUR_PASSWORD;"
+    "SampleConnection": "Server=127.0.0.1;database=puppetcat_sample;uid=puppetcat_user;password=YOUR_PASSWORD;"
   }
 }
 ```
@@ -309,7 +309,7 @@ PuppetCat/
 1. **克隆仓库**
 
 ```bash
-git clone https://github.com/JerryLuo5799/PuppetCat.git
+git clone <repository-url>
 cd PuppetCat
 ```
 
@@ -320,7 +320,7 @@ cd PuppetCat
 ```json
 {
   "ConnectionStrings": {
-    "SampleConnection": "Server=127.0.0.1;database=puppetcat_sample;uid=root;password=您的密码;"
+    "SampleConnection": "Server=127.0.0.1;database=puppetcat_sample;uid=puppetcat_user;password=您的密码;"
   }
 }
 ```
