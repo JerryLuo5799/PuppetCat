@@ -1,31 +1,43 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 using NLog;
-using NLog.Extensions.Logging;
 using NLog.Web;
 using PuppetCat.AspNetCore.Mvc.Middleware;
 using PuppetCat.Sample.Core;
 using PuppetCat.Sample.Data;
 using PuppetCat.Sample.Repository;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 using System;
 
 namespace PuppetCat.Sample.API
 {
+    /// <summary>
+    /// Startup configuration class
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="configuration">Configuration instance</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Configuration property
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services">Service collection</param>
         public void ConfigureServices(IServiceCollection services)
         {
             //cors
@@ -33,11 +45,11 @@ namespace PuppetCat.Sample.API
             {
                 options.AddPolicy("AllowAllOrigin", builder =>
                 {
-                    builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials();
+                    builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
                 });
             });
 
-            services.AddMvc(
+            services.AddControllers(
                 options =>
                 {
                     options.Filters.Add<ModelValidationActionFilter>();
@@ -49,7 +61,7 @@ namespace PuppetCat.Sample.API
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new Info
+                options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
                     Title = "PuppetCat.Sample.API"
@@ -78,8 +90,12 @@ namespace PuppetCat.Sample.API
             services.AddScoped<UserRepository>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app">Application builder</param>
+        /// <param name="env">Web host environment</param>
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors("AllowAllOrigin");
 
@@ -94,18 +110,18 @@ namespace PuppetCat.Sample.API
 
             app.UseHttpsRedirection();
 
-            loggerFactory.AddNLog();//添加NLog
-            //LogManager.LoadConfiguration("nlog.config");
-            loggerFactory.ConfigureNLog("nlog.config");
+            //添加NLog
+            LogManager.Setup().LoadConfigurationFromFile("nlog.config");
 
             //use Middleware
             app.UseLogHandling();
             app.UseErrorHandling();
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+            
+            app.UseEndpoints(endpoints =>
             {
-                //use my Route rules to distribute request
-                routes.Routes.Add(new DistributeRoute(app.ApplicationServices));
+                endpoints.MapControllers();
             });
 
             //app.UseMvcWithDefaultRoute();

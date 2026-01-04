@@ -7,8 +7,8 @@ namespace PuppetCat.Sample.Repository
     /// <summary>
     /// Paging return data
     /// </summary>
-    /// <typeparam name="dynamic"></typeparam>
-    public class PagedynamicResult<dynamic>
+    /// <typeparam name="TDynamic"></typeparam>
+    public class PagedynamicResult<TDynamic>
     {
         public int ItemCount { get; set; }
         public int PageIndex { get; set; }
@@ -31,6 +31,6 @@ namespace PuppetCat.Sample.Repository
                 }
             }
         }
-        public List<dynamic> Data { get; set; }
+        public List<TDynamic> Data { get; set; }
     }
 }

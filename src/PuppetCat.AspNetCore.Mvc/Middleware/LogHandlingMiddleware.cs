@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -80,7 +79,7 @@ namespace PuppetCat.AspNetCore.Mvc.Middleware
                 var body = context.Body;
 
                 //This line allows us to set the reader for the request back at the beginning of its stream.
-                context.EnableRewind();
+                context.EnableBuffering();
 
                 //We now need to read the request stream.  First, we create a new byte[] with the same length as the request stream...
                 var buffer = new byte[Convert.ToInt32(context.ContentLength)];

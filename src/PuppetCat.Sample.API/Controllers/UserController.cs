@@ -47,11 +47,11 @@ namespace PuppetCat.Sample.API.Controllers
             return CreateResult<List<ApiUserGetAllResponse>>(ResponseStatusCode.OK, string.Empty, listRes);
         }
 
-        /// <summary>
-        /// 获取所有用户
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
+        ///// <summary>
+        ///// 获取所有用户
+        ///// </summary>
+        ///// <param name="request"></param>
+        ///// <returns></returns>
         //[HttpPost]
         //[Route("Add")]
         //[ProducesResponseType(typeof(ResponseNoData), 200)]

@@ -23,7 +23,7 @@ namespace PuppetCat.Sample.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(ConStr);
+            optionsBuilder.UseMySql(ConStr, ServerVersion.AutoDetect(ConStr));
         }
     }
 }
