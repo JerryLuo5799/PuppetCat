@@ -6,14 +6,12 @@ namespace PuppetCat.Sample.Repository
 {
     public partial class UserRepository : BaseRepository<User, SampleDbContext>
     {
-        public static readonly UserRepository Intance = new UserRepository(); 
-
         public UserRepository()
         {
 
         }
 
-        internal UserRepository(SampleDbContext context) : base(context)
+        public UserRepository(SampleDbContext context) : base(context)
         {
 
         }

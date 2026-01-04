@@ -71,6 +71,10 @@ namespace PuppetCat.Sample.API
             //路由分发配置
             DistributeRoute.DistributeRoutePath = ConfigCore.AppSettings.DistributeRoutePath;
             DistributeRoute.DistributeRouteIgnorePath = ConfigCore.AppSettings.DistributeRouteIgnorePath;
+
+            //Register DbContext and Repositories for Dependency Injection
+            services.AddScoped<SampleDbContext>();
+            services.AddScoped<PuppetCat.Sample.Repository.UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

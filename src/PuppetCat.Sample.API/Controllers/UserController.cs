@@ -19,6 +19,17 @@ namespace PuppetCat.Sample.API.Controllers
     [Route("User")]
     public class UserController : BaseController
     {
+        private readonly UserRepository _userRepository;
+
+        /// <summary>
+        /// Constructor with dependency injection
+        /// </summary>
+        /// <param name="userRepository">User repository</param>
+        public UserController(UserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
         /// <summary>
         /// 获取所有用户
         /// </summary>
@@ -29,7 +40,7 @@ namespace PuppetCat.Sample.API.Controllers
         [ProducesResponseType(typeof(ResponseDefault<List<ApiUserGetAllResponse>>), 200)]
         public JsonResult GetAll([FromBody]RequestNoData request)
         {
-            List<User> list = UserRepository.Intance.LoadListAll();
+            List<User> list = _userRepository.LoadListAll();
 
             List<ApiUserGetAllResponse> listRes = EntityUtils.CopyToList<User, ApiUserGetAllResponse>(list);
 
@@ -50,7 +61,7 @@ namespace PuppetCat.Sample.API.Controllers
         //    //sw.Start();
         //    User user = new User();
         //    user = EntityUtils.CopyToModel<ApiUserAddRequest, User>(request.data);
-        //    UserRepository.Intance.Save(user);
+        //    _userRepository.Save(user);
 
         //    //sw.Stop();
         //    //_requestLog.Add("APIExcuseTime", sw.ElapsedMilliseconds.ToString());
