@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Internal;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -57,7 +56,7 @@ namespace PuppetCat.AspNetCore.Mvc.Middleware
                 }
             }
 
-            _mvcRoute = services.GetRequiredService<MvcRouteHandler>();
+            _mvcRoute = null;
         }
 
         public async Task RouteAsync(RouteContext context)
@@ -103,7 +102,10 @@ namespace PuppetCat.AspNetCore.Mvc.Middleware
                             context.RouteData.Values["action"] = arrRoute[arrRoute.Length - 1];
                             context.RouteData.Values["distributeUrl"] = requestedUrl ;
 
-                            await _mvcRoute.RouteAsync(context);
+                            if (_mvcRoute != null)
+                            {
+                                await _mvcRoute.RouteAsync(context);
+                            }
                         }
                         else
                         {

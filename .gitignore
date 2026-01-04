@@ -26,3 +26,10 @@
 /src/PuppetCat.Sample.Core/bin/Debug/net5.0
 /src/PuppetCat.Sample.Repository/bin/Debug/net5.0
 /src/PuppetCat.Sample.WebLogic/bin/Debug/net5.0
+/src/PuppetCat.AspNetCore.Core/bin/Debug/net8.0
+/src/PuppetCat.AspNetCore.Mvc/bin/Debug/net8.0
+/src/PuppetCat.Sample.API/bin/Debug/net8.0
+/src/PuppetCat.Sample.Core/bin/Debug/net8.0
+/src/PuppetCat.Sample.Repository/bin/Debug/net8.0
+/src/PuppetCat.Sample.WebLogic/bin/Debug/net8.0
+/src/PuppetCat.Sample.Data/bin/Debug/net8.0

@@ -633,7 +633,7 @@ namespace PuppetCat.Sample.Repository
         public virtual IQueryable<T> LoadAllBySql(string sql, params DbParameter[] para)
         {
             _dbContext.Database.SetCommandTimeout(300);
-            return _dbContext.Set<T>().FromSql(sql, para);
+            return _dbContext.Set<T>().FromSqlRaw(sql, para);
         }
         /// <summary>
         /// IQueryable<T> by T-Sql（async）
@@ -643,7 +643,7 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual async Task<IQueryable<T>> LoadAllBySqlAsync(string sql, params DbParameter[] para)
         {
-            return await Task.Run(() => _dbContext.Set<T>().FromSql(sql, para));
+            return await Task.Run(() => _dbContext.Set<T>().FromSqlRaw(sql, para));
         }
 
 
@@ -655,7 +655,7 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual List<T> LoadListAllBySql(string sql, params DbParameter[] para)
         {
-            return _dbContext.Set<T>().FromSql(sql, para).Cast<T>().ToList();
+            return _dbContext.Set<T>().FromSqlRaw(sql, para).Cast<T>().ToList();
         }
         /// <summary>
         /// List<T> by T-Sql（async）
@@ -665,7 +665,7 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual async Task<List<T>> LoadListAllBySqlAsync(string sql, params DbParameter[] para)
         {
-            return await Task.Run(() => _dbContext.Set<T>().FromSql(sql, para).Cast<T>().ToList());
+            return await Task.Run(() => _dbContext.Set<T>().FromSqlRaw(sql, para).Cast<T>().ToList());
         }
 
         #endregion
@@ -701,7 +701,7 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual bool IsExist(string sql, params DbParameter[] para)
         {
-            return _dbContext.Database.ExecuteSqlCommand(sql, para) > 0;
+            return _dbContext.Database.ExecuteSqlRaw(sql, para) > 0;
         }
         /// <summary>
         /// IsExist by T-SQL (async)
@@ -711,7 +711,7 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual async Task<bool> IsExistAsync(string sql, params DbParameter[] para)
         {
-            return await Task.Run(() => _dbContext.Database.ExecuteSqlCommand(sql, para) > 0);
+            return await Task.Run(() => _dbContext.Database.ExecuteSqlRaw(sql, para) > 0);
         }
 
         #endregion
