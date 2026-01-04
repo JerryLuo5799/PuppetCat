@@ -38,9 +38,9 @@ namespace PuppetCat.Sample.API.Controllers
         [HttpPost]
         [Route("GetAll")]
         [ProducesResponseType(typeof(ResponseDefault<List<ApiUserGetAllResponse>>), 200)]
-        public JsonResult GetAll([FromBody]RequestNoData request)
+        public async Task<JsonResult> GetAll([FromBody]RequestNoData request)
         {
-            List<User> list = _userRepository.LoadListAll();
+            List<User> list = await _userRepository.LoadListAllAsync();
 
             List<ApiUserGetAllResponse> listRes = EntityUtils.CopyToList<User, ApiUserGetAllResponse>(list);
 

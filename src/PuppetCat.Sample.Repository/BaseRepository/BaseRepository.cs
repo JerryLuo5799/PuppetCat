@@ -68,9 +68,9 @@ namespace PuppetCat.Sample.Repository
         {
             _dbContext.Set<T>().Add(entity);
             if (IsCommit)
-                return await Task.Run(() => _dbContext.SaveChanges() > 0);
+                return await _dbContext.SaveChangesAsync() > 0;
             else
-                return await Task.Run(() => false);
+                return false;
         }
 
         /// <summary>
@@ -99,9 +99,9 @@ namespace PuppetCat.Sample.Repository
             _dbContext.Set<T>().Attach(entity);
             _dbContext.Entry<T>(entity).State = EntityState.Modified;
             if (IsCommit)
-                return await Task.Run(() => _dbContext.SaveChanges() > 0);
+                return await _dbContext.SaveChangesAsync() > 0;
             else
-                return await Task.Run(() => false);
+                return false;
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual async Task<T> GetAsync(Expression<Func<T, bool>> predicate)
         {
-            return await Task.Run(() => _dbContext.Set<T>().AsNoTracking().SingleOrDefault(predicate));
+            return await _dbContext.Set<T>().AsNoTracking().SingleOrDefaultAsync(predicate);
         }
 
         /// <summary>
@@ -191,13 +191,13 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual async Task<bool> DeleteAsync(T entity, bool IsCommit = true)
         {
-            if (entity == null) return await Task.Run(() => false);
+            if (entity == null) return false;
             _dbContext.Set<T>().Attach(entity);
             _dbContext.Set<T>().Remove(entity);
             if (IsCommit)
-                return await Task.Run(() => _dbContext.SaveChanges() > 0);
+                return await _dbContext.SaveChangesAsync() > 0;
             else
-                return await Task.Run(() => false); ;
+                return false;
         }
 
         #endregion
@@ -232,7 +232,7 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual async Task<bool> SaveListAsync(List<T> list, bool IsCommit = true)
         {
-            if (list == null || list.Count == 0) return await Task.Run(() => false);
+            if (list == null || list.Count == 0) return false;
 
             list.ToList().ForEach(item =>
             {
@@ -240,9 +240,9 @@ namespace PuppetCat.Sample.Repository
             });
 
             if (IsCommit)
-                return await Task.Run(() => _dbContext.SaveChanges() > 0);
+                return await _dbContext.SaveChangesAsync() > 0;
             else
-                return await Task.Run(() => false);
+                return false;
         }
 
         /// <summary>
@@ -284,7 +284,7 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual async Task<bool> SaveListAsync<T1>(List<T1> list, bool IsCommit = true) where T1 : class
         {
-            if (list == null || list.Count == 0) return await Task.Run(() => false);
+            if (list == null || list.Count == 0) return false;
             var tmp = _dbContext.ChangeTracker.Entries<T>().ToList();
             foreach (var x in tmp)
             {
@@ -303,9 +303,9 @@ namespace PuppetCat.Sample.Repository
                 _dbContext.Set<T1>().Add(item);
             });
             if (IsCommit)
-                return await Task.Run(() => _dbContext.SaveChanges() > 0);
+                return await _dbContext.SaveChangesAsync() > 0;
             else
-                return await Task.Run(() => false);
+                return false;
         }
 
         /// <summary>
@@ -337,7 +337,7 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual async Task<bool> UpdateListAsync(List<T> list, bool IsCommit = true)
         {
-            if (list == null || list.Count == 0) return await Task.Run(() => false);
+            if (list == null || list.Count == 0) return false;
 
             list.ToList().ForEach(item =>
             {
@@ -346,9 +346,9 @@ namespace PuppetCat.Sample.Repository
             });
 
             if (IsCommit)
-                return await Task.Run(() => _dbContext.SaveChanges() > 0);
+                return await _dbContext.SaveChangesAsync() > 0;
             else
-                return await Task.Run(() => false);
+                return false;
         }
 
         /// <summary>
@@ -380,7 +380,7 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual async Task<bool> UpdateListAsync<T1>(List<T1> list, bool IsCommit = true) where T1 : class
         {
-            if (list == null || list.Count == 0) return await Task.Run(() => false);
+            if (list == null || list.Count == 0) return false;
 
             list.ToList().ForEach(item =>
             {
@@ -389,9 +389,9 @@ namespace PuppetCat.Sample.Repository
             });
 
             if (IsCommit)
-                return await Task.Run(() => _dbContext.SaveChanges() > 0);
+                return await _dbContext.SaveChangesAsync() > 0;
             else
-                return await Task.Run(() => false);
+                return false;
         }
 
         /// <summary>
@@ -423,7 +423,7 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual async Task<bool> DeleteListAsync(List<T> list, bool IsCommit = true)
         {
-            if (list == null || list.Count == 0) return await Task.Run(() => false);
+            if (list == null || list.Count == 0) return false;
 
             list.ToList().ForEach(item =>
             {
@@ -432,9 +432,9 @@ namespace PuppetCat.Sample.Repository
             });
 
             if (IsCommit)
-                return await Task.Run(() => _dbContext.SaveChanges() > 0);
+                return await _dbContext.SaveChangesAsync() > 0;
             else
-                return await Task.Run(() => false);
+                return false;
         }
 
         /// <summary>
@@ -466,7 +466,7 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual async Task<bool> DeleteListAsync<T1>(List<T1> list, bool IsCommit = true) where T1 : class
         {
-            if (list == null || list.Count == 0) return await Task.Run(() => false);
+            if (list == null || list.Count == 0) return false;
 
             list.ToList().ForEach(item =>
             {
@@ -475,9 +475,9 @@ namespace PuppetCat.Sample.Repository
             });
 
             if (IsCommit)
-                return await Task.Run(() => _dbContext.SaveChanges() > 0);
+                return await _dbContext.SaveChangesAsync() > 0;
             else
-                return await Task.Run(() => false);
+                return false;
         }
 
         /// <summary>
@@ -511,18 +511,18 @@ namespace PuppetCat.Sample.Repository
         public virtual async Task<bool> DeleteAsync(Expression<Func<T, bool>> predicate, bool IsCommit = true)
         {
             IQueryable<T> entry = (predicate == null) ? _dbContext.Set<T>().AsQueryable() : _dbContext.Set<T>().Where(predicate);
-            List<T> list = entry.ToList();
+            List<T> list = await entry.ToListAsync();
 
-            if (list != null && list.Count == 0) return await Task.Run(() => false);
+            if (list != null && list.Count == 0) return false;
             list.ForEach(item => {
                 _dbContext.Set<T>().Attach(item);
                 _dbContext.Set<T>().Remove(item);
             });
 
             if (IsCommit)
-                return await Task.Run(() => _dbContext.SaveChanges() > 0);
+                return await _dbContext.SaveChangesAsync() > 0;
             else
-                return await Task.Run(() => false);
+                return false;
         }
 
         #endregion
@@ -581,9 +581,9 @@ namespace PuppetCat.Sample.Repository
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public virtual async Task<IQueryable<T>> LoadAllAsync(Expression<Func<T, bool>> predicate)
+        public virtual Task<IQueryable<T>> LoadAllAsync(Expression<Func<T, bool>> predicate)
         {
-            return predicate != null ? await Task.Run(() => _dbContext.Set<T>().Where(predicate).AsNoTracking<T>()) : await Task.Run(() => _dbContext.Set<T>().AsQueryable<T>().AsNoTracking<T>());
+            return Task.FromResult(predicate != null ? _dbContext.Set<T>().Where(predicate).AsNoTracking<T>() : _dbContext.Set<T>().AsQueryable<T>().AsNoTracking<T>());
         }
 
         /// <summary>
@@ -621,7 +621,7 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual async Task<List<T>> LoadListAllAsync(Expression<Func<T, bool>> predicate = null)
         {
-            return predicate != null ? await Task.Run(() => _dbContext.Set<T>().Where(predicate).AsNoTracking().ToList()) : await Task.Run(() => _dbContext.Set<T>().AsQueryable<T>().AsNoTracking().ToList());
+            return predicate != null ? await _dbContext.Set<T>().Where(predicate).AsNoTracking().ToListAsync() : await _dbContext.Set<T>().AsQueryable<T>().AsNoTracking().ToListAsync();
         }
 
         /// <summary>
@@ -641,9 +641,9 @@ namespace PuppetCat.Sample.Repository
         /// <param name="sql">SQL语句</param>
         /// <param name="para">Parameters参数</param>
         /// <returns></returns>
-        public virtual async Task<IQueryable<T>> LoadAllBySqlAsync(string sql, params DbParameter[] para)
+        public virtual Task<IQueryable<T>> LoadAllBySqlAsync(string sql, params DbParameter[] para)
         {
-            return await Task.Run(() => _dbContext.Set<T>().FromSqlRaw(sql, para));
+            return Task.FromResult(_dbContext.Set<T>().FromSqlRaw(sql, para));
         }
 
 
@@ -665,7 +665,7 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual async Task<List<T>> LoadListAllBySqlAsync(string sql, params DbParameter[] para)
         {
-            return await Task.Run(() => _dbContext.Set<T>().FromSqlRaw(sql, para).Cast<T>().ToList());
+            return await _dbContext.Set<T>().FromSqlRaw(sql, para).Cast<T>().ToListAsync();
         }
 
         #endregion
@@ -690,7 +690,7 @@ namespace PuppetCat.Sample.Repository
         public virtual async Task<bool> IsExistAsync(Expression<Func<T, bool>> predicate)
         {
             var entry = _dbContext.Set<T>().Where(predicate);
-            return await Task.Run(() => entry.Any());
+            return await entry.AnyAsync();
         }
 
         /// <summary>
@@ -711,7 +711,7 @@ namespace PuppetCat.Sample.Repository
         /// <returns></returns>
         public virtual async Task<bool> IsExistAsync(string sql, params DbParameter[] para)
         {
-            return await Task.Run(() => _dbContext.Database.ExecuteSqlRaw(sql, para) > 0);
+            return await _dbContext.Database.ExecuteSqlRawAsync(sql, para) > 0;
         }
 
         #endregion
