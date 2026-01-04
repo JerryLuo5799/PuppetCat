@@ -73,7 +73,7 @@ namespace PuppetCat.Sample.API
             DistributeRoute.DistributeRouteIgnorePath = ConfigCore.AppSettings.DistributeRouteIgnorePath;
 
             //Register DbContext and Repositories for Dependency Injection
-            services.AddScoped<SampleDbContext>();
+            services.AddDbContext<SampleDbContext>(ServiceLifetime.Scoped);
             services.AddScoped<PuppetCat.Sample.Repository.UserRepository>();
         }
 

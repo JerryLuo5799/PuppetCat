@@ -6,11 +6,6 @@ namespace PuppetCat.Sample.Repository
 {
     public partial class UserRepository : BaseRepository<User, SampleDbContext>
     {
-        public UserRepository()
-        {
-
-        }
-
         public UserRepository(SampleDbContext context) : base(context)
         {
 
