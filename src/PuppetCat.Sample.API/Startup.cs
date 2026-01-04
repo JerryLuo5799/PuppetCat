@@ -10,6 +10,7 @@ using NLog.Web;
 using PuppetCat.AspNetCore.Mvc.Middleware;
 using PuppetCat.Sample.Core;
 using PuppetCat.Sample.Data;
+using PuppetCat.Sample.Repository;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 
@@ -71,6 +72,10 @@ namespace PuppetCat.Sample.API
             //路由分发配置
             DistributeRoute.DistributeRoutePath = ConfigCore.AppSettings.DistributeRoutePath;
             DistributeRoute.DistributeRouteIgnorePath = ConfigCore.AppSettings.DistributeRouteIgnorePath;
+
+            //Register DbContext and Repositories for Dependency Injection
+            services.AddDbContext<SampleDbContext>(ServiceLifetime.Scoped);
+            services.AddScoped<UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
